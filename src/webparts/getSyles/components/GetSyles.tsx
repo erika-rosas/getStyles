@@ -4,10 +4,17 @@ import { SPComponentLoader } from "@microsoft/sp-loader";
 
 const GetStyles: React.FC<IGetSylesProps> = (props) => {
   const { collectionData } = props;
+  // const [inter, setInter] = React.useState<boolean>(false);
+
   const getPlaceholderStyles = () => {
-    console.log("llege");
-    SPComponentLoader.loadCss(
-      `https://intellego365.sharepoint.com/sites/CentralAxity/M%C3%A9xico/Consultoria2/SiteAssets/styles/style.css?${Date.now()}`
+    // if (!inter) {
+    //   collectionData.map((list) =>
+    //     SPComponentLoader.loadCss(`${list.link}?${Date.now()}`)
+    //   );
+    //   setInter(true);
+    // }
+    collectionData.map((list) =>
+      SPComponentLoader.loadCss(`${list.link}?${Date.now()}`)
     );
   };
   // React.useEffect(() => {}, []);
@@ -16,7 +23,7 @@ const GetStyles: React.FC<IGetSylesProps> = (props) => {
   // }
   return (
     <div>
-      {collectionData !== undefined && collectionData.length > 0
+      {collectionData !== undefined
         ? getPlaceholderStyles()
         : "Agrega la url de los styles"}
     </div>
