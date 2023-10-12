@@ -20312,25 +20312,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var GetStyles = function (props) {
     var collectionData = props.collectionData;
-    // const [inter, setInter] = React.useState<boolean>(false);
     var getPlaceholderStyles = function () {
-        // if (!inter) {
-        //   collectionData.map((list) =>
-        //     SPComponentLoader.loadCss(`${list.link}?${Date.now()}`)
-        //   );
-        //   setInter(true);
-        // }
         collectionData.map(function (list) {
             return _microsoft_sp_loader__WEBPACK_IMPORTED_MODULE_1__["SPComponentLoader"].loadCss("".concat(list.link, "?").concat(Date.now()));
         });
     };
-    // React.useEffect(() => {}, []);
-    // if (collectionData !== undefined) {
-    //   getPlaceholderStyles(collectionData[0].link);
-    // }
     return (react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", null, collectionData !== undefined
         ? getPlaceholderStyles()
-        : "Agrega la url de los styles"));
+        : "Agrega la o las urls de los styles"));
 };
 /* harmony default export */ __webpack_exports__["default"] = (GetStyles);
 
