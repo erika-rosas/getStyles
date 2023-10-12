@@ -9,15 +9,11 @@ import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import { IReadonlyTheme } from "@microsoft/sp-component-base";
 import * as strings from "GetSylesWebPartStrings";
 import GetStyles from "./components/GetSyles";
-import { IGetSylesProps, IStyles } from "./components/IGetSylesProps";
-import {
-  PropertyFieldCollectionData,
-  CustomCollectionFieldType,
-} from "@pnp/spfx-property-controls/lib/PropertyFieldCollectionData";
+import { IGetSylesProps } from "./components/IGetSylesProps";
+import { NAMEROUTES } from "../../constants/routes";
 
 export interface IGetSylesWebPartProps {
   description: string;
-  collectionData: IStyles[];
 }
 
 export default class GetSylesWebPart extends BaseClientSideWebPart<IGetSylesWebPartProps> {
@@ -28,12 +24,12 @@ export default class GetSylesWebPart extends BaseClientSideWebPart<IGetSylesWebP
     const element: React.ReactElement<IGetSylesProps> = React.createElement(
       GetStyles,
       {
-        collectionData: this.properties.collectionData,
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
+        urlStyles: this._getUrlStyle(),
       }
     );
 
@@ -46,6 +42,14 @@ export default class GetSylesWebPart extends BaseClientSideWebPart<IGetSylesWebP
     });
   }
 
+  private _getUrlStyle(): string {
+    const urlAbsolute = this.context.pageContext.web.absoluteUrl;
+    const indexAlias = urlAbsolute.indexOf(NAMEROUTES.consultancyAlias);
+    const index = urlAbsolute.indexOf(NAMEROUTES.consultancy);
+    return indexAlias !== -1
+      ? `${urlAbsolute.substring(0, indexAlias)}${NAMEROUTES.consultancyAlias}`
+      : `${urlAbsolute.substring(0, index)}${NAMEROUTES.consultancy}`;
+  }
   private _getEnvironmentMessage(): Promise<string> {
     if (!!this.context.sdks.microsoftTeams) {
       // running in Teams, office.com or Outlook
@@ -126,22 +130,6 @@ export default class GetSylesWebPart extends BaseClientSideWebPart<IGetSylesWebP
               groupFields: [
                 PropertyPaneTextField("description", {
                   label: strings.DescriptionFieldLabel,
-                }),
-                PropertyFieldCollectionData("collectionData", {
-                  key: "collectionData",
-                  label: "Collection data",
-                  panelHeader: "Collection data panel header",
-                  manageBtnLabel: "Manage collection data",
-                  value: this.properties.collectionData,
-                  fields: [
-                    {
-                      id: "link",
-                      title: "Link style",
-                      type: CustomCollectionFieldType.string,
-                      required: true,
-                    },
-                  ],
-                  disabled: false,
                 }),
               ],
             },

@@ -4,7 +4,7 @@ export interface IGetSylesProps {
     environmentMessage: string;
     hasTeamsContext: boolean;
     userDisplayName: string;
-    collectionData: IStyles[];
+    urlStyles: string;
 }
 export interface IStyles {
     link: string;
