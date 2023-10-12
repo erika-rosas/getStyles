@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "get-styles-client-side-solution",
+    "id": "d9342865-3361-4a20-a4ef-8b5c222779a6",
+    "version": "1.0.0.1",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.17.4"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "getStyles description"
+      },
+      "longDescription": {
+        "default": "getStyles description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "get-styles Feature",
+        "description": "The feature that activates elements of the get-styles solution.",
+        "id": "c6e39d0c-3ede-48e9-b631-1b7870c23898",
+        "version": "1.0.0.1"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/get-styles.sppkg"
+  }
+}
